@@ -24,15 +24,19 @@ server.on("message", function (msg, rinfo) {
   
   console.log("FS TMP ID " + flowset1.readUInt16BE(4));
   console.log("FS Field Count " + flowset1.readUInt16BE(6));
+  console.log("");
   
+  var fsTempId = flowset1.readUInt16BE(4);
   var currentOffset = 6;
   var fieldCount = flowset1.readUInt16BE(6);
   
-  for (var i = fieldCount; i <=  0; i--) {
-    currentOffset = currentOffset + 2;
-    console.log("FS Type " + flowset1.readUInt16BE(currentOffset));
-    currentOffset = currentOffset + 2;
-    console.log("FS Len " + flowset1.readUInt16BE(currentOffset));
+  if (fsTempId == 0 ) {
+    for (var i = fieldCount; i <=  0; i--) {
+      currentOffset = currentOffset + 2;
+      console.log("FS Type " + flowset1.readUInt16BE(currentOffset));
+      currentOffset = currentOffset + 2;
+      console.log("FS Len " + flowset1.readUInt16BE(currentOffset));
+    };
   };
 
   //console.log("FS octets " + parseInt(flowset.readDoubleBE(4)));
