@@ -4,21 +4,27 @@ var server = dgram.createSocket("udp4");
 
 server.on("message", function (msg, rinfo) {
   console.log("ver " + msg.readUInt16BE(0));
-  console.log("count " + msg.readUInt16BE(2)); //2
-  console.log("sysUpTime " + msg.readUInt32BE(4)); //6
-  console.log("UnixSec " + msg.readUInt32BE(8)); //12
-  console.log("seq " + msg.readUInt32BE(12)); //24
-  console.log("sourceID " + msg.readUInt32BE(16)); //40
+  console.log("count " + msg.readUInt16BE(2));
+  console.log("sysUpTime " + msg.readUInt32BE(4));
+  console.log("UnixSec " + msg.readUInt32BE(8));
+  console.log("seq " + msg.readUInt32BE(12)); 
+  console.log("sourceID " + msg.readUInt32BE(16)); 
   
   //pull the flowset header to check its length
-  var flowset = new Buffer(4);
-  msg.copy(flowset,0,20,24);
+  var flowsetLenChk = new Buffer(4);
+  msg.copy(flowsetLenChk,0,20,24); //first flowset starts at 20
   
-  console.log("FSID " + flowset.readUInt16BE(0));
-  console.log("FS LEN " + flowset.readUInt16BE(2));
-  //console.log("FS octets " + parseInt(flowset.readDoubleBE(4)));
+  console.log("FSID " + flowsetLenChk.readUInt16BE(0));
+  console.log("FS LEN " + flowsetLenChk.readUInt16BE(2));
   console.log("");
 
+  var flowsetLen = flowsetLenChk.readUInt16BE(2);
+  var flowset1 = new Buffer(flowsetLen);
+  msg.copy(flowset1,0,20,20+flowsetLen);
+  
+  console.log("FS TMP ID " + flowset1.readUInt16BE(4));
+  
+  //console.log("FS octets " + parseInt(flowset.readDoubleBE(4)));
 
 });
 
