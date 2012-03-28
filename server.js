@@ -32,7 +32,7 @@ server.on("message", function (msg, rinfo) {
     currentOffset = currentOffset + 2;
     console.log("FS Type " + flowset1.readUInt16BE(currentOffset));
     currentOffset = currentOffset + 2;
-    console.log("FS Len " + flowset1.readUInt16BE(6));
+    console.log("FS Len " + flowset1.readUInt16BE(currentOffset));
   };
 
   //console.log("FS octets " + parseInt(flowset.readDoubleBE(4)));
