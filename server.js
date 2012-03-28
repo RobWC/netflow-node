@@ -23,7 +23,8 @@ server.on("message", function (msg, rinfo) {
   msg.copy(flowset1,0,20,20+flowsetLen);
   
   console.log("FS TMP ID " + flowset1.readUInt16BE(4));
-  
+  console.log("FS Field Count " + flowset1.readUInt16BE(6));
+
   //console.log("FS octets " + parseInt(flowset.readDoubleBE(4)));
 
 });
