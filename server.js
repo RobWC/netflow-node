@@ -30,7 +30,7 @@ server.on("message", function (msg, rinfo) {
   var currentOffset = 6;
   var fieldCount = flowset1.readUInt16BE(6);
   
-  if (fsTempId == 0 ) {
+  if (fsTempId >= 0 || fsTempId <= 255) {
     for (var i = fieldCount; i <=  0; i--) {
       currentOffset = currentOffset + 2;
       console.log("FS Type " + flowset1.readUInt16BE(currentOffset));
