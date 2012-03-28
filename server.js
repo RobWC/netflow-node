@@ -16,7 +16,8 @@ server.on("message", function (msg, rinfo) {
   
   console.log("FSID " + flowset.readUInt16BE(0));
   console.log("FS LEN " + flowset.readUInt16BE(2));
-    console.log("FS octets " + parseInt(flowset.readDoubleBE(4)));
+  console.log("FS octets " + parseInt(flowset.readDoubleBE(4)));
+  console.log("");
 
 
   //console.log("server got: " + msg + " from " + rinfo.address + ":" + rinfo.port);
