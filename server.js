@@ -22,14 +22,15 @@ server.on("message", function (msg, rinfo) {
   var flowset1 = new Buffer(flowsetLen);
   msg.copy(flowset1,0,20,20+flowsetLen);
   
-  console.log("FS TMP ID " + flowset1.readUInt16BE(4));
-  console.log("FS Field Count " + flowset1.readUInt16BE(6));
+  console.log("FS TMP ID " + flowset1.readUInt16BE(2));
+  console.log("FS Field Count " + flowset1.readUInt16BE(4));
   console.log("");
   
-  var fsTempId = flowset1.readUInt16BE(4);
-  var currentOffset = 6;
-  var fieldCount = flowset1.readUInt16BE(6);
+  var fsTempId = flowset1.readUInt16BE(2);
+  var currentOffset = 4;
+  var fieldCount = flowset1.readUInt16BE(4);
   
+  //detect if its a template or data
   if (fsTempId >= 0 || fsTempId <= 255) {
     for (var i = fieldCount; i <=  0; i--) {
       currentOffset = currentOffset + 2;
