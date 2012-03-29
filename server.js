@@ -27,9 +27,9 @@ server.on("message", function (msg, rinfo) {
   console.log("FS Field Count " + flowset1.readUInt16BE(4));
   console.log("");
   
-  var fsTempId = flowset1.readUInt16BE(2);
-  var currentOffset = 4;
-  var fieldCount = flowset1.readUInt16BE(4);
+  var fsTempId = flowset1.readUInt16BE(4);
+  var currentOffset = 6;
+  var fieldCount = flowset1.readUInt16BE(6);
   
   //detect if its a template or data
   if (fsTempId >= 0 && fsTempId <= 255) {
