@@ -21,6 +21,7 @@ server.on("message", function (msg, rinfo) {
   var flowsetLen = flowsetLenChk.readUInt16BE(2);
   var flowset1 = new Buffer(flowsetLen);
   msg.copy(flowset1,0,20,20+flowsetLen);
+  console.log("FS LEN Buf " + flowset1.length);
   
   console.log("FS TMP ID " + flowset1.readUInt16BE(2));
   console.log("FS Field Count " + flowset1.readUInt16BE(4));
@@ -33,6 +34,7 @@ server.on("message", function (msg, rinfo) {
   //detect if its a template or data
   if (fsTempId >= 0 || fsTempId <= 255) {
     for (var i = fieldCount; i <=  0; i--) {
+      console.log("offset " + currentOffset);
       currentOffset = currentOffset + 2;
       console.log("FS Type " + flowset1.readUInt16BE(currentOffset));
       currentOffset = currentOffset + 2;
