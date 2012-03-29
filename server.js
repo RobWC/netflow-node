@@ -31,7 +31,7 @@ server.on("message", function (msg, rinfo) {
   var fieldCount = flowset1.readUInt16BE(4);
   
   //detect if its a template or data
-  if (fsTempId >= 0 || fsTempId <= 255) {
+  if (fsTempId >= 0 && fsTempId <= 255) {
     for (var i = fieldCount; i <=  0; i--) {
       currentOffset = currentOffset + 2;
       console.log("FS Type " + flowset1.readUInt16BE(currentOffset));
